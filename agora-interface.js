@@ -122,6 +122,8 @@ function joinChannel(channelName) {
       console.log("User " + uid + " join channel successfully");
       createCameraStream(uid);
       localStreams.camera.id = uid; // keep track of the stream uid 
+      // joing pubnub with userID
+      window.publish(uid)
   }, function(err) {
       console.log("[ERROR] : join channel failed", err);
   });
