@@ -18,6 +18,7 @@
 #local-stream-container { 
   position: relative; 
   display: inline-block;
+  max-width: 350px;
 }
 
 .remote-stream-container { 
@@ -26,6 +27,7 @@
 
 #remote-streams {
   height: 100%;
+  max-width: 350px;
 }
 
 #local-video {
