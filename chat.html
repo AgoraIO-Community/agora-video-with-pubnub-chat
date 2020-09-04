@@ -58,6 +58,6 @@
   <script>
     var uid = new RegExp('[\?&]' + 'uid' + '=([^&#]*)').exec(window.location.href);
     console.log('uid: ' + uid[1])
-    window.initPubNub(uid[1],'test3')
+    window.initPubNub('', '', uid[1],'test3')
   </script>
 </body>

@@ -1,11 +1,4 @@
 
-// join channel modal
-$( "#join-channel" ).click(function( event ) {
-  var agoraAppId = $('#form-appid').val();
-  var channelName = $('#form-channel').val();
-  initClientAndJoinChannel(agoraAppId, channelName);
-  $("#modalForm").modal("hide");
-});
 
 // UI buttons
 function enableUiControls(localStream) {
@@ -42,36 +35,38 @@ function enableUiControls(localStream) {
 
   // keyboard listeners 
   $(document).keypress(function(e) {
-    switch (e.key) {
-      case "m":
-        console.log("squick toggle the mic");
-        toggleMic(localStream);
-        break;
-      case "v":
-        console.log("quick toggle the video");
-        toggleVideo(localStream);
-        break; 
-      case "s":
-        console.log("initializing screen share");
-        toggleScreenShareBtn(); // set screen share button icon
-        $("#screen-share-btn").prop("disabled",true); // disable the button on click
-        if(screenShareActive){
-          stopScreenShare();
-        } else {
-          initScreenShare(); 
-        }
-        break;  
-      case "q":
-        console.log("so sad to see you quit the channel");
-        leaveChannel(); 
-        break;   
-      default:  // do nothing
-    }
-
-    // (for testing) 
-    if(e.key === "r") { 
-      window.history.back(); // quick reset
-    }
+    if(!$(chatToggleBtn.hasClass('is-visible'))){
+      switch (e.key) {
+        case "m":
+          console.log("squick toggle the mic");
+          toggleMic(localStream);
+          break;
+        case "v":
+          console.log("quick toggle the video");
+          toggleVideo(localStream);
+          break; 
+        case "s":
+          console.log("initializing screen share");
+          toggleScreenShareBtn(); // set screen share button icon
+          $("#screen-share-btn").prop("disabled",true); // disable the button on click
+          if(screenShareActive){
+            stopScreenShare();
+          } else {
+            initScreenShare(); 
+          }
+          break;  
+        case "q":
+          console.log("so sad to see you quit the channel");
+          leaveChannel(); 
+          break;   
+        default:  // do nothing
+      }
+  
+      // (for testing) 
+      if(e.key === "r") { 
+        window.history.back(); // quick reset
+      }
+    } 
   });
 }
 

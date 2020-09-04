@@ -27,6 +27,8 @@ chatToggleBtn.click(function() {
   toggleChatWindow();
 });
 
+window.toggleChatWindow = toggleChatWindow;
+
 // resizable text area
 function calcHeight(value) {
   let numberOfLineBreaks = (value.match(/\n/g) || []).length;
@@ -81,6 +83,7 @@ function addRemoteMsg(uid, msg) {
 
 $('#fab_send').click(function() {
   const msg = textarea.value.replace(/\n/g, '<br/>');;
+  console.log(msg)
   window.publishMessage(msg,function(){
     addLocalMsg(msg);
     textarea.value = ""; // after the message is sent clear the text area.

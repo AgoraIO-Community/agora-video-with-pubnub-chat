@@ -7,9 +7,9 @@
 	<body>
 		<div class="container-fluid p-0">
 			<div id="main-container">
-				<div id="screen-share-btn-container" class="col-2 float-right text-right mt-2">
+				<div id="screen-share-btn-container" class="col-2 float-left text-left mt-2">
 					<button id="screen-share-btn"  type="button" class="btn btn-lg">
-						<i id="screen-share-icon" class="fas fa-share-square"></i>
+						<i id="screen-share-icon" class="fas fa-desktop"></i>
 					</button>
 				</div>
 				<div id="buttons-container" class="row justify-content-center mt-3">
@@ -36,7 +36,7 @@
 							<!-- insert remote streams dynamically -->
 						</div>
 					</div>
-					<div id="local-stream-container" class="col p-0">
+					<div id="local-stream-container" class="col p-0 mb-10">
 						<div id="mute-overlay" class="col">
 							<i id="mic-icon" class="fas fa-microphone-slash"></i>
 						</div>
@@ -46,7 +46,6 @@
 						<div id="local-video" class="col p-0"></div>
 					</div>
 				</div>
-			</div>
 		</div>
 		<!-- Modal -->
 		<div class="modal fade" id="modalForm">
@@ -59,11 +58,18 @@
 						</button>
 					</div>
 					<div class="modal-body mx-3">
-						<div class="md-form mb-5">
+						<div class="md-form mb-4">
 							<input type="text" id="form-appid" class="form-control">
 							<label for="form-appid">Agora AppId</label>
 						</div>
-		
+						<div class="md-form mb-4">
+							<input type="text" id="form-publishKey" class="form-control">
+							<label for="form-publishKey">PubNub PublishKey</label>
+						</div>
+						<div class="md-form mb-4">
+							<input type="text" id="form-subscribeKey" class="form-control">
+							<label for="form-subscribeKey">PubNub SubscribeKey</label>
+						</div>
 						<div class="md-form mb-4">
 							<input type="text" id="form-channel" class="form-control">
 							<label for="form-channel">Channel</label>
@@ -76,6 +82,21 @@
 				</div>
 			</div>
 		</div>
+		<!-- Chat UI -->
+		<div class="fabs">
+			<div class="chat">
+				<div class="chat_header"></div>
+				<div id="chat_fullscreen" class="chat_conversion chat_converse">
+					<!-- msgs will be dynamically added below -->
+				</div>
+				<div class="fab_field">
+					<textarea id="chatSend" name="chat_message" placeholder="Send a message" class="chat_field chat_message"></textarea>
+					<a id="fab_send" class="fab"><i class="zmdi zmdi-mail-send"></i></a>        
+				</div>
+			</div>
+			<a id="chatToggleBtn" class="fab"><i class="prime zmdi zmdi-comment-outline"></i></a>
+		</div>
+	</div>
 	</body>
 	<!-- Agora SDK -->
 	<script src="AgoraRTCSDK-3.1.1.js"></script>
@@ -86,6 +107,9 @@
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<!-- chat ui style -->
+	<link rel="stylesheet" type="text/css" href="chat.css" />
+	<!-- disable ui elements and show join channel modal -->
 	<script type="text/javascript">
 		$("#mic-btn").prop("disabled", true);
 		$("#video-btn").prop("disabled", true);
@@ -102,6 +126,21 @@
 	<script src="agora-interface.js"></script>
 	<!-- PubNub Client -->
 	<script src="pubnub-interface.js"></script>
+	<script src="chat.js"></script>
+	<script type="text/javascript">
+	// init the session when user clicks join
+// join channel modal
+$( "#join-channel" ).click(function( event ) {
+  var agoraAppId = $('#form-appid').val();
+  var channelName = $('#form-channel').val();
+  initClientAndJoinChannel(agoraAppId, channelName);
+  var pubKey = $('#form-publishKey').val();
+  var subKey = $('#form-subscribeKey').val();
+  var uid = new RegExp('[\?&]' + 'uid' + '=([^&#]*)').exec(window.location.href);
+  window.initPubNub(pubKey, subKey, uid[1], channelName);
+  $("#modalForm").modal("hide");
+});
+	</script>
 	<!-- Custom Styles -->
 	<link rel="stylesheet" type="text/css" href="style.css"/>
 </html>
