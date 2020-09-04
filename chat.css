@@ -288,13 +288,13 @@ ul li{
   text-align: center;
 }
 
-#fab_camera {
+/* #fab_camera {
   float: left;
   background: rgba(0, 0, 0, 0);
-}
+} */
 
 #fab_send {
-  float: right;
+  /* float: right; */
   background: rgba(0, 0, 0, 0);
 }
 
@@ -376,7 +376,7 @@ ul li{
   background: rgba(0, 0, 0, 0.03);
 }
 
-.chat .chat_converse .chat_msg_item.chat_msg_item__local_user .chat_avatar {
+.chat .chat_converse .chat_msg_item.chat_msg_item_local_user .chat_avatar {
   right: -52px;
   background: rgba(0, 0, 0, 0.6);
 }
@@ -395,7 +395,7 @@ ul li{
   color: #666;
 }
 
-.chat .chat_converse .chat_msg_item.chat_msg_item__local_user {
+.chat .chat_converse .chat_msg_item.chat_msg_item_local_user {
   margin-right: 20px;
   float: right;
   background: #42a5f5;
@@ -606,7 +606,10 @@ strong.chat_time {
 
 @media only screen and (min-width: 300px) {
   .chat {
-    width: 250px;
+    width: 300px;
+  }
+  .chat_field {
+    width: 80%;
   }
 }
 /* SMARTPHONES LANDSCAPE */
