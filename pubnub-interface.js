@@ -2,11 +2,13 @@ let pubNub;
 let channelName;
 let UID;
 
-function initPubNub(uid, channel) {
+function initPubNub(pubKey, subKey, uid, channel) {
+    console.log(pubKey, subKey)
     pubNub = new PubNub({
-        publishKey : '',
-        subscribeKey : '',
+        publishKey : pubKey,
+        subscribeKey : subKey,
         uuid: uid,
+        logVerbosity: true,
         ssl: true
     });
 

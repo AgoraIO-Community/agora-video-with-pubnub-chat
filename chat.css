@@ -9,8 +9,7 @@ ul li{
   position: fixed;
   margin: 1em;
   right: 0;
-  z-index: 998;
-  
+  z-index: 1031;
 }
 
 .fab {
