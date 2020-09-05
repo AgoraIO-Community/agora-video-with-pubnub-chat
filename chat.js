@@ -70,7 +70,7 @@ function addRemoteMsg(uid, msg) {
   chatMsgWindow.append(
     $('<div/>', {'class': 'chat_msg_item chat_msg_item_remote_user'}).append(
       $('<div/>', {'class': 'chat_avatar'}).append(
-        $('<img/>', {'src': 'https://res.cloudinary.com/dqvwa7vpe/image/upload/v1496415051/avatar_ma6vug.jpg'})
+        // $('<img/>', {'src': 'https://res.cloudinary.com/dqvwa7vpe/image/upload/v1496415051/avatar_ma6vug.jpg'})
       )
     ).append(
       $('<span/>').append(msg)

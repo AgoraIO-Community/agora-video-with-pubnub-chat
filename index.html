@@ -133,12 +133,12 @@
 $( "#join-channel" ).click(function( event ) {
   var agoraAppId = $('#form-appid').val();
   var channelName = $('#form-channel').val();
-  initClientAndJoinChannel(agoraAppId, channelName);
   var pubKey = $('#form-publishKey').val();
   var subKey = $('#form-subscribeKey').val();
-  var uid = new RegExp('[\?&]' + 'uid' + '=([^&#]*)').exec(window.location.href);
+	var uid = new RegExp('[\?&]' + 'uid' + '=([^&#]*)').exec(window.location.href);
+	$("#modalForm").modal("hide");
+	initClientAndJoinChannel(agoraAppId, channelName);
   window.initPubNub(pubKey, subKey, uid[1], channelName);
-  $("#modalForm").modal("hide");
 });
 	</script>
 	<!-- Custom Styles -->
