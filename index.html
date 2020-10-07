@@ -74,7 +74,10 @@
 							<input type="text" id="form-channel" class="form-control">
 							<label for="form-channel">Channel</label>
 						</div>
-		
+						<div class="md-form mb-4">
+							<input type="number" id="form-uid" class="form-control" value="1001" data-decimals="0"/>
+							<label for="form-channel">UID</label>
+						</div>
 					</div>
 					<div class="modal-footer d-flex justify-content-center">
 						<button id="join-channel" class="btn btn-default">Join Channel</button>
@@ -131,17 +134,31 @@
 	<script src="chat.js"></script>
 	<script type="text/javascript">
 	// init the session when user clicks join
-// join channel modal
-$( "#join-channel" ).click(function( event ) {
-  var agoraAppId = $('#form-appid').val();
-  var channelName = $('#form-channel').val();
-  var pubKey = $('#form-publishKey').val();
-  var subKey = $('#form-subscribeKey').val();
-	var uid = new RegExp('[\?&]' + 'uid' + '=([^&#]*)').exec(window.location.href);
-	$("#modalForm").modal("hide");
-	initClientAndJoinChannel(agoraAppId, channelName);
-  window.initPubNub(pubKey, subKey, uid[1], channelName);
-});
+	// join channel modal
+	$( "#join-channel" ).click(function( event ) {
+		var agoraAppId = $('#form-appid').val();
+		var channelName = $('#form-channel').val();
+		var pubKey = $('#form-publishKey').val();
+		var subKey = $('#form-subscribeKey').val();
+		var uid = $("#form-uid").val();
+		console.log('uid: ' + uid);
+		$("#modalForm").modal("hide");
+		initClientAndJoinChannel(agoraAppId, channelName, uid);
+		window.initPubNub(pubKey, subKey, uid, channelName);
+		// window.initPubNub(pubKey, subKey, uid[1], channelName);
+	});
+
+	var $uidInput = $("#form-uid")
+	$uidInput.on("change", function (event) {
+			var value = $uidInput.val()
+			if (value == 1017) {
+				value = 1001;
+			} else if (value == 1000) {
+				value = 1016;
+			} 	 
+				
+			$uidInput.val(value)
+	})
 	</script>
 	<!-- Custom Styles -->
 	<link rel="stylesheet" type="text/css" href="style.css"/>
