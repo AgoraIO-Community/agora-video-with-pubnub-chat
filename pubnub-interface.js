@@ -21,13 +21,14 @@ function initPubNub(pubKey, subKey, uid, channel) {
         message: function(msg) {
             console.log(msg);
             if (msg.message.uuid != UID) {
-                window.addRemoteMsg(msg.message.uuid, msg.message.description)
+                addRemoteMsg(msg.message.uuid, msg.message.description)
             } else {
                 console.log('message sent successfully to channel');
             }
         },
         presence: function(presenceEvent) {
-            // handle presence
+            // handle presence events
+            console.log('presence event: ' + JSON.stringify(presenceEvent));
         }
     })      
     console.log("Subscribing..");
@@ -58,7 +59,3 @@ function publishMessage(message, callback) {
         }
     })
 }
-
-
-window.initPubNub = initPubNub
-window.publishMessage = publishMessage

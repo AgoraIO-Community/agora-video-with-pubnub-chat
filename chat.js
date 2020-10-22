@@ -1,6 +1,8 @@
-const textarea = document.querySelector("#chatSend");
-const chatMsgWindow = $('#chat_fullscreen');
 const chatToggleBtn = $('#chatToggleBtn');
+const chatMsgWindow = $('#chat_fullscreen');
+const chatIcon = $('#chatIcon');
+const textarea = $("#chatTextInput");
+const sendBtn = $('#chatUi_send');
 
 // hide chat UI to start
 $('#chat_converse').css('display', 'none');
@@ -11,23 +13,19 @@ chatMsgWindow.css('display', 'block');
 //Toggle chat and links
 function toggleChatWindow() {
   chatToggleBtn.toggleClass('is-float');
-  $('.prime').toggleClass('zmdi-comment-outline');
-  $('.prime').toggleClass('zmdi-close');
-  $('.prime').toggleClass('is-active');
-  $('.prime').toggleClass('is-visible');
+  chatIcon.toggleClass('zmdi-comment-outline').toggleClass('zmdi-close'); // toggle between icons
+  chatIcon.toggleClass('is-active').toggleClass('is-visible'); // toggle visible/active state
   $('.chat').toggleClass('is-visible');
-  $('.fab').toggleClass('is-visible');
+  $('.chatUi').toggleClass('is-visible');
 
   if (chatToggleBtn.hasClass('is-visible')){
-    scrollToBottm();
+    scrollToBottom();
   }
 }
 
 chatToggleBtn.click(function() {
   toggleChatWindow();
 });
-
-window.toggleChatWindow = toggleChatWindow;
 
 // resizable text area
 function calcHeight(value) {
@@ -51,7 +49,7 @@ function resizeTextArea() {
 }
 
 // chat msg UI
-function scrollToBottm() {
+function scrollToBottom() {
   chatMsgWindow.animate({
     scrollTop: chatMsgWindow[0].scrollHeight
  }, 500);
@@ -62,7 +60,7 @@ function addLocalMsg(msg) {
     $('<span/>', {'class': 'chat_msg_item chat_msg_item_local_user'}).append(msg)
   );
   // scroll to bottom
-  scrollToBottm();
+  scrollToBottom();
 }
 
 function addRemoteMsg(uid, msg) {
@@ -77,19 +75,21 @@ function addRemoteMsg(uid, msg) {
     )
   );
   if (chatToggleBtn.hasClass('is-visible')){
-    scrollToBottm();
+    scrollToBottom();
   }
 }
 
-$('#fab_send').click(function() {
+// send a message when the user clicks the send button
+sendBtn.click(function() {
+  sendLocalMsg();
+});
+
+function sendLocalMsg() {
   const msg = textarea.value.replace(/\n/g, '<br/>');;
   console.log(msg)
-  window.publishMessage(msg,function(){
+  publishMessage(msg,function(){
     addLocalMsg(msg);
     textarea.value = ""; // after the message is sent clear the text area.
     resizeTextArea();
   })
-});
-
-window.addLocalMsg = addLocalMsg;
-window.addRemoteMsg = addRemoteMsg;
+}

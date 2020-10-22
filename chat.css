@@ -4,7 +4,7 @@
 ul li{
   list-style: none;
 }
-.fabs {
+.chatContainer {
   bottom: 0;
   position: fixed;
   margin: 1em;
@@ -12,7 +12,7 @@ ul li{
   z-index: 1031;
 }
 
-.fab {
+.chatUi {
   display: block;
   width: 56px;
   height: 56px;
@@ -30,7 +30,7 @@ ul li{
   background: #42a5f5;
 }
 
-.fab > i {
+.chatUi > i {
   font-size: 2em;
   line-height: 55px;
   -webkit-transition: all .2s ease-out;
@@ -38,7 +38,7 @@ ul li{
   transition: all .2s ease-in-out;
 }
 
-.fab:not(:last-child) {
+.chatUi:not(:last-child) {
   width: 0;
   height: 0;
   margin: 20px auto 0;
@@ -47,12 +47,12 @@ ul li{
   line-height: 40px;
 }
 
-.fab:not(:last-child) > i {
+.chatUi:not(:last-child) > i {
   font-size: 1.4em;
   line-height: 40px;
 }
 
-.fab:not(:last-child).is-visible {
+.chatUi:not(:last-child).is-visible {
   width: 40px;
   height: 40px;
   margin: 15px auto 10;
@@ -60,34 +60,34 @@ ul li{
   visibility: visible;
 }
 
-.fab:nth-last-child(1) {
+.chatUi:nth-last-child(1) {
   -webkit-transition-delay: 25ms;
   transition-delay: 25ms;
 }
 
-.fab:not(:last-child):nth-last-child(2) {
+.chatUi:not(:last-child):nth-last-child(2) {
   -webkit-transition-delay: 20ms;
   transition-delay: 20ms;
 }
 
-.fab:not(:last-child):nth-last-child(3) {
+.chatUi:not(:last-child):nth-last-child(3) {
   -webkit-transition-delay: 40ms;
   transition-delay: 40ms;
 }
 
-.fab:not(:last-child):nth-last-child(4) {
+.chatUi:not(:last-child):nth-last-child(4) {
   -webkit-transition-delay: 60ms;
   transition-delay: 60ms;
 }
 
-.fab:not(:last-child):nth-last-child(5) {
+.chatUi:not(:last-child):nth-last-child(5) {
   -webkit-transition-delay: 80ms;
   transition-delay: 80ms;
 }
 
-/* .fab(:last-child):active,
-.fab(:last-child):focus,
-.fab(:last-child):hover {
+/* .chatUi(:last-child):active,
+.chatUi(:last-child):focus,
+.chatUi(:last-child):hover {
   box-shadow: 0 0 6px rgba(0, 0, 0, .16), 0 6px 12px rgba(0, 0, 0, .32);
 } */
 /*Chatbox*/
@@ -263,7 +263,7 @@ ul li{
     cursor: pointer;
 
 }
-.fab_field {
+.chatUi_field {
   width: 100%;
   display: inline-block;
   text-align: center;
@@ -274,7 +274,7 @@ ul li{
 
 }
 
-.fab_field2 {
+.chatUi_field2 {
   bottom: 0px;
   position: absolute;
   border-bottom-right-radius: 0px;
@@ -282,34 +282,34 @@ ul li{
       z-index: 999;
 }
 
-.fab_field a {
+.chatUi_field a {
   display: inline-block;
   text-align: center;
 }
 
-/* #fab_camera {
+/* #chatUi_camera {
   float: left;
   background: rgba(0, 0, 0, 0);
 } */
 
-#fab_send {
+#chatUi_send {
   /* float: right; */
   background: rgba(0, 0, 0, 0);
 }
 
-.fab_field .fab {
+.chatUi_field .chatUi {
   width: 35px;
   height: 35px;
   box-shadow: none;
   margin: 5px;
 }
 
-.fab_field .fab>i {
+.chatUi_field .chatUi>i {
   font-size: 1.6em;
   line-height: 35px;
   color: #bbb;
 }
-.fab_field .fab>i:hover {
+.chatUi_field .chatUi>i:hover {
   color: #42a5f5;
 }
 
@@ -645,7 +645,7 @@ strong.chat_time {
 
 
 
-.blue .fab {
+.blue .chatUi {
   background: #42a5f5;
   color: #fff;
 }

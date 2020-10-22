@@ -1,165 +1,156 @@
 <html lang="en">
-	<head>
-		<title>Agora Group Video Chat Demo</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-	</head>
-	<body>
-		<div class="container-fluid p-0">
-			<div id="main-container">
-				<div id="screen-share-btn-container" class="col-2 float-left text-left mt-2">
-					<button id="screen-share-btn"  type="button" class="btn btn-lg">
-						<i id="screen-share-icon" class="fas fa-desktop"></i>
-					</button>
-				</div>
-				<div id="buttons-container" class="row justify-content-center mt-3">
-					<div class="col-md-2 text-center">
-						<button id="mic-btn" type="button" class="btn btn-block btn-dark btn-lg">
-							<i id="mic-icon" class="fas fa-microphone"></i>
-						</button>
-					</div>
-					<div class="col-md-2 text-center">
-						<button id="video-btn"  type="button" class="btn btn-block btn-dark btn-lg">
-							<i id="video-icon" class="fas fa-video"></i>
-						</button>
-					</div>
-					<div class="col-md-2 text-center">
-						<button id="exit-btn"  type="button" class="btn btn-block btn-danger btn-lg">
-							<i id="exit-icon" class="fas fa-phone-slash"></i>
-						</button>
-					</div>
-				</div>
-				<div id="full-screen-video"></div>
-				<div id="lower-video-bar" class="row fixed-bottom mb-1">
-					<div id="remote-streams-container" class="container col-9 ml-1">
-						<div id="remote-streams" class="row">
-							<!-- insert remote streams dynamically -->
-						</div>
-					</div>
-					<div id="local-stream-container" class="col p-0 mb-10">
-						<div id="mute-overlay" class="col">
-							<i id="mic-icon" class="fas fa-microphone-slash"></i>
-						</div>
-						<div id="no-local-video" class="col text-center">
-							<i id="user-icon" class="fas fa-user"></i>
-						</div>
-						<div id="local-video" class="col p-0"></div>
-					</div>
-				</div>
-		</div>
-		<!-- Modal -->
-		<div class="modal fade" id="modalForm">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header text-center">
-						<h4 class="modal-title w-100 font-weight-bold">Join Channel</h4>
-						<button type="button" class="close" data-dismiss="modal">
-							<span>&times;</span>
-						</button>
-					</div>
-					<div class="modal-body mx-3">
-						<div class="md-form mb-4">
-							<input type="text" id="form-appid" class="form-control">
-							<label for="form-appid">Agora AppId</label>
-						</div>
-						<div class="md-form mb-4">
-							<input type="text" id="form-publishKey" class="form-control">
-							<label for="form-publishKey">PubNub PublishKey</label>
-						</div>
-						<div class="md-form mb-4">
-							<input type="text" id="form-subscribeKey" class="form-control">
-							<label for="form-subscribeKey">PubNub SubscribeKey</label>
-						</div>
-						<div class="md-form mb-4">
-							<input type="text" id="form-channel" class="form-control">
-							<label for="form-channel">Channel</label>
-						</div>
-						<div class="md-form mb-4">
-							<input type="number" id="form-uid" class="form-control" value="1001" data-decimals="0"/>
-							<label for="form-channel">UID</label>
-						</div>
-					</div>
-					<div class="modal-footer d-flex justify-content-center">
-						<button id="join-channel" class="btn btn-default">Join Channel</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Chat UI -->
-		<div class="fabs">
-			<div class="chat">
-				<div class="chat_header"></div>
-				<div id="chat_fullscreen" class="chat_conversion chat_converse">
-					<!-- msgs will be dynamically added below -->
-				</div>
-				<div class="fab_field">
-					<textarea id="chatSend" name="chat_message" placeholder="Send a message" class="chat_field chat_message"></textarea>
-					<a id="fab_send" class="fab"><i class="zmdi zmdi-mail-send"></i></a>        
-				</div>
-			</div>
-			<a id="chatToggleBtn" class="fab"><i class="prime zmdi zmdi-comment-outline"></i></a>
-		</div>
-	</div>
-	</body>
-	<!-- Agora SDK -->
-	<script src="AgoraRTCSDK-3.1.1.js"></script>
-	<!-- PubNub SDK -->	
-	<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.4.min.js"></script>
-	<!-- Styling and helper frameworks - BootStrap, JQuery, FontAwesome -->
-	<!-- <link rel='stylesheet' type='text/css' href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic&subset=latin,cyrillic" crossorigin="anonymous"> -->
-	<!-- <link rel='stylesheet' type='text/css' href="https://zavoloklom.github.io/material-design-iconic-font/css/docs.md-iconic-font.min.css" crossorigin="anonymous"> -->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-	<!-- chat ui style -->
-	<link rel="stylesheet" type="text/css" href="chat.css" />
-	<!-- disable ui elements and show join channel modal -->
-	<script type="text/javascript">
-		$("#mic-btn").prop("disabled", true);
-		$("#video-btn").prop("disabled", true);
-		$("#screen-share-btn").prop("disabled", true);
-		$("#exit-btn").prop("disabled", true);
+  <head>
+    <title>Agora Group Video Chat Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="container-fluid p-0">
+      <div id="main-container">
+        <div id="screen-share-btn-container" class="col-2 float-left text-left mt-2">
+          <button id="screen-share-btn"  type="button" class="btn btn-lg">
+            <i id="screen-share-icon" class="fas fa-desktop"></i>
+          </button>
+        </div>
+        <div id="buttons-container" class="row justify-content-center mt-3">
+          <div class="col-md-2 text-center">
+            <button id="mic-btn" type="button" class="btn btn-block btn-dark btn-lg">
+              <i id="mic-icon" class="fas fa-microphone"></i>
+            </button>
+          </div>
+          <div class="col-md-2 text-center">
+            <button id="video-btn"  type="button" class="btn btn-block btn-dark btn-lg">
+              <i id="video-icon" class="fas fa-video"></i>
+            </button>
+          </div>
+          <div class="col-md-2 text-center">
+            <button id="exit-btn"  type="button" class="btn btn-block btn-danger btn-lg">
+              <i id="exit-icon" class="fas fa-phone-slash"></i>
+            </button>
+          </div>
+        </div>
+        <div id="full-screen-video"></div>
+        <div id="lower-video-bar" class="row fixed-bottom mb-1">
+          <div id="remote-streams-container" class="container col-9 ml-1">
+            <div id="remote-streams" class="row">
+              <!-- insert remote streams dynamically -->
+            </div>
+          </div>
+          <div id="local-stream-container" class="col p-0 mb-10">
+            <div id="mute-overlay" class="col">
+              <i id="mic-icon" class="fas fa-microphone-slash"></i>
+            </div>
+            <div id="no-local-video" class="col text-center">
+              <i id="user-icon" class="fas fa-user"></i>
+            </div>
+            <div id="local-video" class="col p-0"></div>
+          </div>
+        </div>
+    </div>
+    <!-- Join Form - Modal Overlay -->
+    <div class="modal fade" id="modalForm">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Join Channel</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-3">
+            <div class="md-form mb-4">
+              <input type="text" id="form-appid" class="form-control">
+              <label for="form-appid">Agora AppId</label>
+            </div>
+            <div class="md-form mb-4">
+              <input type="text" id="form-token" class="form-control">
+              <label for="form-token">Agora Token</label>
+            </div>
+            <div class="md-form mb-4">
+              <input type="text" id="form-publishKey" class="form-control">
+              <label for="form-publishKey">PubNub PublishKey</label>
+            </div>
+            <div class="md-form mb-4">
+              <input type="text" id="form-subscribeKey" class="form-control">
+              <label for="form-subscribeKey">PubNub SubscribeKey</label>
+            </div>
+            <div class="md-form mb-4">
+              <input type="text" id="form-channel" class="form-control">
+              <label for="form-channel">Channel</label>
+            </div>
+            <div class="md-form mb-4">
+              <input type="number" id="form-uid" class="form-control" value="1001" data-decimals="0"/>
+              <label for="form-uid">UID</label>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button id="join-channel" class="btn btn-default">Join Channel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Chat UI -->
+    <div class="chatContainer">
+      <div class="chat">
+        <div class="chat_header"></div>
+        <div id="chat_fullscreen" class="chat_conversion chat_converse">
+          <!-- msgs will be dynamically added below -->
+        </div>
+        <div class="chatUi_field">
+          <textarea id="chatTextInput" name="chat_message" placeholder="Send a message" class="chat_field chat_message"></textarea>
+          <a id="chatUi_send" class="chatUi"><i class="zmdi zmdi-mail-send"></i></a>        
+        </div>
+      </div>
+      <a id="chatToggleBtn" class="chatUi"><i id="chatIcon" class="zmdi zmdi-comment-outline"></i></a>
+    </div>
+  </div>
+  </body>
+  <!-- Agora SDK -->
+  <script src="AgoraRTCSDK-3.1.1.js"></script>
+  <!-- PubNub SDK -->	
+  <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.4.min.js"></script>
+  <!-- Styling and helper frameworks - BootStrap, JQuery, FontAwesome -->
+  <!-- <link rel='stylesheet' type='text/css' href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic&subset=latin,cyrillic" crossorigin="anonymous"> -->
+  <!-- <link rel='stylesheet' type='text/css' href="https://zavoloklom.github.io/material-design-iconic-font/css/docs.md-iconic-font.min.css" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+  <!-- chat ui style -->
+  <link rel="stylesheet" type="text/css" href="chat.css" />
+  <!-- disable ui elements and show join channel modal -->
+  <script type="text/javascript">
+    $("#mic-btn").prop("disabled", true);
+    $("#video-btn").prop("disabled", true);
+    $("#screen-share-btn").prop("disabled", true);
+    $("#exit-btn").prop("disabled", true);
 
-		$(document).ready(function(){
-			$("#modalForm").modal("show");
-		});
-	</script>
-	<!-- UI Controls -->
-	<script src="ui.js"></script>
-	<!-- Agora Client -->
-	<script src="agora-interface.js"></script>
-	<!-- PubNub Client -->
-	<script src="pubnub-interface.js"></script>
-	<script src="chat.js"></script>
-	<script type="text/javascript">
-	// init the session when user clicks join
-	// join channel modal
-	$( "#join-channel" ).click(function( event ) {
-		var agoraAppId = $('#form-appid').val();
-		var channelName = $('#form-channel').val();
-		var pubKey = $('#form-publishKey').val();
-		var subKey = $('#form-subscribeKey').val();
-		var uid = $("#form-uid").val();
-		console.log('uid: ' + uid);
-		$("#modalForm").modal("hide");
-		initClientAndJoinChannel(agoraAppId, channelName, uid);
-		window.initPubNub(pubKey, subKey, uid, channelName);
-		// window.initPubNub(pubKey, subKey, uid[1], channelName);
-	});
-
-	var $uidInput = $("#form-uid")
-	$uidInput.on("change", function (event) {
-			var value = $uidInput.val()
-			if (value == 1017) {
-				value = 1001;
-			} else if (value == 1000) {
-				value = 1016;
-			} 	 
-				
-			$uidInput.val(value)
-	})
-	</script>
-	<!-- Custom Styles -->
-	<link rel="stylesheet" type="text/css" href="style.css"/>
+    $(document).ready(function(){
+      $("#modalForm").modal("show");
+    });
+  </script>
+  <!-- UI Controls -->
+  <script src="ui.js"></script>
+  <!-- Agora Client -->
+  <script src="agora-interface.js"></script>
+  <!-- PubNub Client -->
+  <script src="pubnub-interface.js"></script>
+  <script src="chat.js"></script>
+  <script type="text/javascript">
+  // init the session when user clicks join
+  // join channel modal
+  $( "#join-channel" ).click(function( event ) {
+    var agoraAppId = $('#form-appid').val();
+    var token = $('#form-token').val();
+    var channelName = $('#form-channel').val();
+    var pubKey = $('#form-publishKey').val();
+    var subKey = $('#form-subscribeKey').val();
+    var uid = $("#form-uid").val();
+    $("#modalForm").modal("hide");
+    initClientAndJoinChannel(agoraAppId, token, channelName, uid);
+    initPubNub(pubKey, subKey, uid, channelName);
+  });
+  </script>
+  <!-- Custom Styles -->
+  <link rel="stylesheet" type="text/css" href="style.css"/>
 </html>
