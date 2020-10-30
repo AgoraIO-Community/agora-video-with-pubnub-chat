@@ -1,5 +1,5 @@
 # Agora Video with PubNub Chat Web App
-![](https://miro.medium.com/max/1400/1*XEu9XT-U1RKmuTtz8k3qMQ.png)
+![](https://miro.medium.com/max/1400/1*O7M6oK5Lvr-40lFBmNzb4g.png)
 This is a group video chat web app that uses [Agora.io](https://www.agora.io) and [PubNub](https://www.pubnub.com) to build a simple group video chat web app, very similar to Skype or whichever other video chat platform you prefer. 
 
 ## Pre Requisites
