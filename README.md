@@ -9,7 +9,7 @@ This is a group video chat web app that uses [Agora.io](https://www.agora.io) an
 - An understanding of HTML/CSS/JS 
 - An understand of how Bootstrap and JQuery function _(minimal knowledge needed)_
 
-Base Project tutorial: [GUIDE.MD](/GUIDE.MD)
+Base Project tutorial: [GUIDE.MD](/GUIDE.MD)   
 PubNub Chat Add-on tutorial: [Add PubNub Chat to Agora Video Web App](https://www.agora.io/en/blog/adding-pubnub-chat-to-an-agora-video-web-app/)
 
 ## Hosted Demo ##
